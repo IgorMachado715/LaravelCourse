@@ -10,80 +10,75 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
-        @vite('resources/css/app.css')
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
 
-    <header class="bg-gray-200">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-    <div class="flex lg:flex-1">
-      <a href="/" class="-m-1.5 p-1.5">
-        <span class="sr-only">Your Company</span>
-        
-      </a>
-    </div>
-    <div class="flex lg:hidden">
-      <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-        <span class="sr-only">Open main menu</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button>
-    </div>
-    <div class="hidden lg:flex lg:gap-x-12">
-      <div class="relative">
-        <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
-          Events
-        </button>
-      </div>
-
-      <a href="/events/create" class="text-sm font-semibold leading-6 text-gray-900">Create events</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
-    </div>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
-    </div>
-  </nav>
-  <!-- Mobile menu, show/hide based on menu open state. -->
-  <div class="lg:hidden" role="dialog" aria-modal="true">
-    <!-- Background backdrop, show/hide based on slide-over state. -->
-    <div class="fixed inset-0 z-10"></div>
-    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-      <div class="flex items-center justify-between">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
-        </a>
-        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-          <span class="sr-only">Close menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      <div class="mt-6 flow-root">
-        <div class="-my-6 divide-y divide-gray-500/10">
-          <div class="space-y-2 py-6">
-            
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</a>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</a>
-          </div>
-          <div class="py-6">
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
-          </div>
-        </div>
-      </div>
+    <header>
+    <nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/">Laravel Events</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="/" class="nav-link active link-primary text-white" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/" class="nav-link link-primary text-white" >Events</a>
+        </li>
+        <li class="nav-item">
+          <a href="/events/create" class="nav-link link-primary text-white" >Create Event</a>
+        </li>
+        <li class="nav-item">
+          <a href="/contact" class="nav-link link-primary text-white" >Contact</a>
+        </li>
+      </ul>
+      @auth
+      <form class="d-flex navbar-nav " role="search">
+      <li class="nav-item">
+        <a href="/dashboard" class="nav-link link-primary text-white me-2" type="submit">My access</a>
+        </li>
+        <li class="nav-item">
+            <form action="/logout" method="POST">
+                @csrf
+                <a class="nav-link link-primary text-white" href="/logout" 
+                onClick="event.preventDefault();
+                        this.closest('form').submit();">
+                        Logout
+                </a>
+            </form>
+        </li>
+      </form>
+      @endauth
+      @guest
+      <form class="d-flex" role="search">
+        <a href="/login" class="btn btn-outline-success me-2" type="submit">Login</a>
+        <a href="/register" class="btn btn-outline-success" type="submit">Register</a>
+      </form>
+      @endguest
     </div>
   </div>
-
+</nav>
 </header>
 
-        @yield('content')
-        <footer>
-            <p>Events Laravel &copy; 2024</p>
-        </footer>
+<main class="container-fluid">
+  <div class="row">
+    @if(session ('msg'))
+      <p class="msg">{{ session ('msg') }}</p>
+    @endif
+    @yield('content')
+  </div>
+</main>
+
+<footer class="bg-body-tertiary text-center text-lg-start mt-5">
+      <div class="text-center p-3 text-white" style="background-color: rgb(33, 37, 41);">
+        © 2020 Copyright:
+        <a class="nav-link link-primary text-white" href="https://igormachado715.github.io/">igormachado.com</a>
+      </div>
+</footer>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
