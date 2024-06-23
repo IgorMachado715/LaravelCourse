@@ -61,7 +61,7 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">{{ date ("d/m/Y", strtotime($event->date)) }}</li>
-              <li class="list-group-item">X participants</li>
+              <li class="list-group-item">{{ count($event->users) }} participants</li>
             </ul>
             <div class="card-body">
               <a href="/events/{{ $event->id }}" class="btn btn-primary">More info</a>

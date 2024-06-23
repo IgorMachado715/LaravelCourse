@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', '$event->title')
+@section('title', $event->title)
 
 @section('content') 
 
@@ -13,9 +13,17 @@
             <div id="info-container" class="col-md-6">
                 <h1 class="h4">{{ $event->title }}</h1>
                 <p class="event-city"><ion-icon name="location-outline"></ion-icon> {{ $event->city }}</p>
-                <p class="event-participants"><ion-icon name="people-outline"></ion-icon> X participants</p>
+                <p class="event-participants"><ion-icon name="people-outline"></ion-icon> {{ count($event->users) }} participants</p>
                 <p class="event-owner"><ion-icon name="star-outline"></ion-icon> {{ $eventOwner['name'] }}</p>
-                <a href="#" class="btn btn-secondary">Confirm Presence</a>
+                @if(!$hasUserJoined)
+                <form action="/events/join/{{ $event->id }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary" onClick="event.preventDefault();
+                    this.closest('form').submit();">Confirm Presence</button>
+                </form>
+                @else
+                    <p class="already-joined-msg"> You are already a participant of this event!</p>
+                @endif
                 <h3>The event has:</h3>
                 <ul id="items-list">
                     @foreach($event->items as $item)
